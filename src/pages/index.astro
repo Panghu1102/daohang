@@ -1,0 +1,87 @@
+---
+import '../styles/global.css';
+const links = [
+  { key:'blog', title:'Panghu Blog', url:'https://panghu.bond', display:'panghu.bond', icon:'book', featured:true },
+  { key:'github', title:'GitHub', url:'https://github.com/Panghu1102', display:'github.com/Panghu1102', icon:'code' },
+  { key:'jyacs', title:'JYACS', url:'https://jyacs.qzz.io', display:'jyacs.qzz.io', icon:'spark' },
+  { key:'drive', title:'Cloud Drive', url:'https://drive.panghu.bond', display:'drive.panghu.bond', icon:'cloud' },
+];
+const icons = {
+  book:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/><path d="M8 7h8M8 11h6"/>',
+  code:'<path d="m8 8-4 4 4 4m8-8 4 4-4 4M14 4l-4 16"/>',
+  spark:'<path d="m12 3 1.9 6.1L20 11l-6.1 1.9L12 19l-1.9-6.1L4 11l6.1-1.9L12 3Z"/><path d="m19 17 .8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8L19 17Z"/>',
+  cloud:'<path d="M20 16.6A4.5 4.5 0 0 0 17 8a6 6 0 0 0-11 2 4 4 0 0 0 0 8h12a4 4 0 0 0 2-1.4Z"/><path d="M12 13v7m-3-3 3 3 3-3"/>'
+};
+const descriptions = {
+ zh:{blog:'技术笔记、开发实践，以及偶尔记录的日常与思考。',github:'我的开源代码、个人项目，以及不断进行中的新尝试。',jyacs:'为 Just Yuri 打造的 AI 对话扩展项目，让创意成为现实。',drive:'我的云端文件空间，一个自己动手搭建的小工具。'},
+ en:{blog:'Development notes, experiments, and a few thoughts from everyday life.',github:'Open-source code, personal projects, and everything I am exploring.',jyacs:'An AI-powered conversation extension for Just Yuri.',drive:'My self-hosted little corner of the cloud.'}
+};
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f8f9fb" />
+  <meta name="description" content="Panghu1102 的个人主页，探索技术、开源项目、博客与更多互联网足迹。" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>Panghu1102 · Personal Space</title>
+  <script is:inline>try { const theme=localStorage.getItem('theme'); document.documentElement.dataset.theme=theme || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); } catch {document.documentElement.dataset.theme='light'}</script>
+</head>
+<body>
+  <header class="topbar container">
+    <a class="wordmark" href="#home" aria-label="Panghu1102 首页">Panghu<span>.</span></a>
+    <div class="actions">
+      <button class="pill" id="language" type="button" aria-label="Switch language">EN</button>
+      <button class="pill" id="theme" type="button" aria-label="切换深色或浅色模式">◐</button>
+    </div>
+  </header>
+  <main id="home" class="container">
+    <section class="hero fade" aria-labelledby="hero-title">
+      <div class="eyebrow"><span class="dot"></span><span data-t="eyebrow">一片属于我的互联网角落</span></div>
+      <h1 id="hero-title">Hi, I'm <span class="gradient">Panghu.</span></h1>
+      <p class="lead" data-t="hero">你好，我是 Panghu1102。热爱编程、开源与互联网技术，喜欢把突发奇想变成真正运行的项目。欢迎来到我的个人空间。</p>
+      <div class="hero-actions"><a class="primary" href="#projects"><span data-t="explore">探索我的世界</span><span aria-hidden="true">↗</span></a><a class="secondary" href="#contact" data-t="sayHello">给我留言</a></div>
+    </section>
+    <section class="section" id="projects" aria-labelledby="project-title">
+      <div class="section-heading"><div class="kicker">01 / EXPLORE</div><h2 id="project-title" data-t="projectsTitle">在互联网上的足迹。</h2><p data-t="projectsSubtitle">一些正在维护的站点，以及我愿意与你分享的项目。</p></div>
+      <div class="grid">
+      {links.map(link => <a class:list={['project',{'featured':link.featured}]} href={link.url} target="_blank" rel="noopener noreferrer" aria-label={`${link.title}，在新窗口打开`}>
+        <div class="project-head"><div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" set:html={icons[link.icon]}></svg></div><span class="arrow" aria-hidden="true">↗</span></div>
+        <h3>{link.title}</h3><p data-desc={link.key}>{descriptions.zh[link.key]}</p><span class="url">{link.display}</span>
+      </a>)}
+      </div>
+    </section>
+    <section class="section about-block" aria-labelledby="about-title">
+      <div class="section-heading"><div class="kicker">02 / ABOUT</div><h2 id="about-title" data-t="aboutTitle">好奇心，是一切的开始。</h2><p data-t="aboutSubtitle">Code. Create. Explore.</p></div>
+      <div class="about-note"><p data-t="aboutOne">我主要关注网络安全、AI 大模型的应用，也会研究 iOS、Windows、虚拟机以及各种有趣的工具。</p><p data-t="aboutTwo">在这里，我记录真实的探索过程、踩过的坑和偶然闪现的灵感。希望其中一些内容，也能对你有所帮助。</p></div>
+    </section>
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="contact"><div class="contact-layout">
+        <div><div class="kicker">03 / CONNECT</div><h2 id="contact-title" data-t="contactTitle">保持联系。</h2><p data-t="contactText">有建议、问题，或者只是想打个招呼？欢迎在这里留下你的想法，我会认真阅读每一条留言。</p><a class="email-link" href="mailto:ph101102@163.com">✉ ph101102@163.com ↗</a></div>
+        <form name="feedback" method="POST" action="/success/" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="feedback" />
+          <div class="honeypot" aria-hidden="true"><label>不要填写此项 <input name="bot-field" tabindex="-1" autocomplete="off" /></label></div>
+          <div class="field"><label for="name" data-t="name">怎么称呼你？（选填）</label><input id="name" name="name" type="text" maxlength="80" autocomplete="name" data-ph="name" placeholder="你的昵称" /></div>
+          <div class="field"><label for="email" data-t="email">邮箱（选填，方便回复）</label><input id="email" name="email" type="email" maxlength="160" autocomplete="email" placeholder="you@example.com" /></div>
+          <div class="field"><label for="message" data-t="message">想说点什么？</label><textarea id="message" name="message" required minlength="2" maxlength="3000" data-ph="message" placeholder="写下你的留言..." ></textarea></div>
+          <button class="send" type="submit" data-t="send">发送留言 ↗</button>
+        </form>
+      </div></div>
+    </section>
+  </main>
+  <footer class="container foot"><span>© {new Date().getFullYear()} Panghu1102. <span data-t="footer">用好奇心与热爱创造。</span></span><div class="foot-links"><a href="https://github.com/Panghu1102" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="mailto:ph101102@163.com">Email ↗</a><a href="#home" data-t="top">回到顶部 ↑</a></div></footer>
+  <script define:vars={{descriptions}}>
+    const translations = {
+      zh:{eyebrow:'一片属于我的互联网角落',hero:'你好，我是 Panghu1102。热爱编程、开源与互联网技术，喜欢把突发奇想变成真正运行的项目。欢迎来到我的个人空间。',explore:'探索我的世界',sayHello:'给我留言',projectsTitle:'在互联网上的足迹。',projectsSubtitle:'一些正在维护的站点，以及我愿意与你分享的项目。',aboutTitle:'好奇心，是一切的开始。',aboutSubtitle:'Code. Create. Explore.',aboutOne:'我主要关注网络安全、AI 大模型的应用，也会研究 iOS、Windows、虚拟机以及各种有趣的工具。',aboutTwo:'在这里，我记录真实的探索过程、踩过的坑和偶然闪现的灵感。希望其中一些内容，也能对你有所帮助。',contactTitle:'保持联系。',contactText:'有建议、问题，或者只是想打个招呼？欢迎在这里留下你的想法，我会认真阅读每一条留言。',name:'怎么称呼你？（选填）',email:'邮箱（选填，方便回复）',message:'想说点什么？',send:'发送留言 ↗',footer:'用好奇心与热爱创造。',top:'回到顶部 ↑',namePlaceholder:'你的昵称',messagePlaceholder:'写下你的留言...'},
+      en:{eyebrow:'A little corner of the internet',hero:'I’m Panghu1102. I love code, open source, and the little ideas that grow into real projects. Welcome to my personal space.',explore:'Explore my world',sayHello:'Say hello',projectsTitle:'My corners of the web.',projectsSubtitle:'A few places I build, maintain, and love to share.',aboutTitle:'It starts with curiosity.',aboutSubtitle:'Code. Create. Explore.',aboutOne:'I explore cybersecurity, applications of large language models, operating systems, virtual machines, and all kinds of useful tools.',aboutTwo:'I share experiments, lessons learned, and occasional sparks of inspiration. Hopefully something here can help you too.',contactTitle:'Let’s connect.',contactText:'Questions, suggestions, or just saying hi? Leave me a note. I read every message.',name:'What should I call you? (optional)',email:'Email (optional, for a reply)',message:'Your message',send:'Send message ↗',footer:'Made with curiosity and care.',top:'Back to top ↑',namePlaceholder:'Your name',messagePlaceholder:'Write your message...'}
+    };
+    const langBtn=document.getElementById('language');
+    const themeBtn=document.getElementById('theme');
+    let lang='zh'; try { lang=localStorage.getItem('lang')==='en'?'en':'zh'; }catch{}
+    function applyLanguage(){document.documentElement.lang=lang==='zh'?'zh-CN':'en';document.querySelectorAll('[data-t]').forEach(el=>{el.textContent=translations[lang][el.dataset.t]});document.querySelectorAll('[data-desc]').forEach(el=>{el.textContent=descriptions[lang][el.dataset.desc]});document.querySelector('[data-ph="name"]').placeholder=translations[lang].namePlaceholder;document.querySelector('[data-ph="message"]').placeholder=translations[lang].messagePlaceholder;langBtn.textContent=lang==='zh'?'EN':'中文';}
+    langBtn.addEventListener('click',()=>{lang=lang==='zh'?'en':'zh';try{localStorage.setItem('lang',lang)}catch{}applyLanguage()});applyLanguage();
+    themeBtn.addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;try{localStorage.setItem('theme',theme)}catch{}});
+  </script>
+</body>
+</html>
